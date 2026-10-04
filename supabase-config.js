@@ -3,7 +3,7 @@
  * These client values are public by design. Never put a service_role key here.
  */
 window.VELORA_SUPABASE_CONFIG = {
-  url: 'https://YOUR_PROJECT.supabase.co',
-  anonKey: 'YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY',
+  url: 'https://bppiyeiiqmebdqfzpobi.supabase.co',
+  anonKey: 'sb_publishable_xALjn0hPIqjdhxx_PPSHFQ_Jbr5bp6g',
   bucket: 'product-images'
 };

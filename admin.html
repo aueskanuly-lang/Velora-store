@@ -1,1 +1,68 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Studio dashboard — Velora</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"></head><body class="admin-body"><div class="admin-layout"><aside class="admin-sidebar"><a class="wordmark" href="index.html">velora<span>.</span></a><span class="admin-label">YOUR STUDIO</span><nav class="admin-nav"><button class="active" data-section="overview">▦ &nbsp; Overview</button><button data-section="products">◈ &nbsp; Products</button><button data-section="categories">◇ &nbsp; Categories</button><button data-section="orders">▤ &nbsp; Orders</button><button data-section="customers">♙ &nbsp; Customers</button></nav><a class="admin-back" href="index.html">← &nbsp; Back to store</a></aside><main class="admin-content"><section class="admin-section" id="overview-section"><div class="admin-top"><div><h1>Good morning, Studio.</h1><p>Here's a little look at how things are going.</p></div><span id="admin-date"></span></div><div class="stat-grid"><article class="stat-card"><span>TOTAL SALES</span><strong>$12,480</strong><small>↗ 12.8% this month</small></article><article class="stat-card"><span>ORDERS</span><strong>184</strong><small>↗ 8 new this week</small></article><article class="stat-card"><span>PRODUCTS</span><strong class="product-stat">8</strong><small>Across 4 categories</small></article><article class="stat-card"><span>CUSTOMERS</span><strong>1,248</strong><small>↗ 34 this month</small></article></div><div class="admin-panel"><h2>Sales at a glance</h2><div class="chart-bars"><i style="height:38%" data-day="Mon"></i><i style="height:55%" data-day="Tue"></i><i style="height:43%" data-day="Wed"></i><i style="height:76%" data-day="Thu"></i><i style="height:62%" data-day="Fri"></i><i style="height:94%" data-day="Sat"></i><i style="height:70%" data-day="Sun"></i></div></div><div class="admin-panel"><h2>Recent orders</h2><div id="recent-orders"></div></div></section><section class="admin-section" id="products-section" hidden><div class="admin-top"><div><h1>Your products.</h1><p>A considered edit of everything you offer.</p></div><button class="admin-button" id="add-product">+ &nbsp; Add a product</button></div><div class="admin-panel"><div id="products-table"></div></div></section><section class="admin-section" id="categories-section" hidden><div class="admin-top"><div><h1>Your categories.</h1><p>Organise your edit, your way.</p></div><button class="admin-button" id="add-category">+ &nbsp; Add a category</button></div><div class="admin-panel"><div id="categories-table"></div></div></section><section class="admin-section" id="orders-section" hidden><div class="admin-top"><div><h1>Orders.</h1><p>A little overview of what's on its way.</p></div></div><div class="admin-panel"><div id="orders-table"></div></div></section><section class="admin-section" id="customers-section" hidden><div class="admin-top"><div><h1>Customers.</h1><p>Lovely people, lovely choices.</p></div></div><div class="admin-panel"><div id="customers-table"></div></div></section></main></div><dialog id="product-dialog"><form method="dialog" id="admin-product-form" class="admin-form"><h2 class="wide">Add a product</h2><input name="id" type="hidden"><label class="wide">Product name<input name="name" required placeholder="The Everyday Shirt"></label><label>Category<select name="category" required></select></label><label>Price<input name="price" type="number" min="1" step="0.01" required></label><label>Compare at price<input name="oldPrice" type="number" min="0" step="0.01"></label><label>Image file ID<input name="image" required placeholder="photo-123456..."></label><label class="wide">Short description<input name="description" placeholder="A considered everyday favourite."></label><label><input name="isNew" type="checkbox" value="true"> New arrival</label><div class="wide" style="display:flex;gap:9px"><button class="admin-button" value="save">Save product</button><button class="admin-button" value="cancel" formnovalidate>Cancel</button></div></form></dialog><dialog id="category-dialog"><form method="dialog" id="admin-category-form" class="admin-form"><h2 class="wide">Add a category</h2><label class="wide">Category name<input name="name" required></label><div class="wide" style="display:flex;gap:9px"><button class="admin-button" value="save">Save category</button><button class="admin-button" value="cancel" formnovalidate>Cancel</button></div></form></dialog><script src="app.js" defer></script><script src="admin.js" defer></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><title>Velora Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+  <section class="admin-login" id="admin-login" aria-labelledby="login-title">
+    <a class="wordmark" href="index.html">velora<span>.</span></a>
+    <div class="login-card">
+      <span class="eyebrow" data-i18n="Protected workspace">Protected workspace</span>
+      <h1 id="login-title" data-i18n="Admin sign in">Admin sign in</h1>
+      <p data-i18n="Sign in with your store administrator account.">Sign in with your store administrator account.</p>
+      <form id="admin-login-form">
+        <label><span data-i18n="Email">Email</span><input type="email" name="email" autocomplete="username" required></label>
+        <label><span data-i18n="Password">Password</span><input type="password" name="password" autocomplete="current-password" required></label>
+        <button class="admin-button" type="submit" data-i18n="Sign in">Sign in</button>
+        <p class="admin-message" id="login-message" role="status"></p>
+      </form>
+      <div class="language-switcher" aria-label="Choose language"><button type="button" data-language="kz">KZ</button><button type="button" data-language="ru">RU</button><button type="button" data-language="en">EN</button></div>
+    </div>
+  </section>
+
+  <div class="admin-layout" id="admin-app" hidden>
+    <aside class="admin-sidebar">
+      <a class="wordmark" href="index.html">velora<span>.</span></a><span class="admin-label" data-i18n="YOUR STUDIO">YOUR STUDIO</span>
+      <nav class="admin-nav"><button class="active" data-section="overview">▦ &nbsp; <span data-i18n="Overview">Overview</span></button><button data-section="products">◈ &nbsp; <span data-i18n="Products">Products</span></button></nav>
+      <div class="language-switcher"><button type="button" data-language="kz">KZ</button><button type="button" data-language="ru">RU</button><button type="button" data-language="en">EN</button></div>
+      <a class="admin-back" href="index.html" data-i18n="Back to store">← &nbsp; Back to store</a>
+      <button class="admin-signout" id="admin-signout" data-i18n="Sign out">Sign out</button>
+    </aside>
+    <main class="admin-content">
+      <section class="admin-section" id="overview-section">
+        <div class="admin-top"><div><h1 data-i18n="Your store.">Your store.</h1><p data-i18n="A quick look at your product collection.">A quick look at your product collection.</p></div><span id="admin-date"></span></div>
+        <div class="stat-grid"><article class="stat-card"><span data-i18n="PRODUCTS">PRODUCTS</span><strong class="product-stat">0</strong><small data-i18n="In your collection">In your collection</small></article><article class="stat-card"><span data-i18n="IN STOCK">IN STOCK</span><strong id="stock-stat">0</strong><small data-i18n="Available units">Available units</small></article></div>
+        <div class="admin-panel"><h2 data-i18n="Welcome to your store admin">Welcome to your store admin</h2><p data-i18n="Add products and they will appear in Shop for every visitor.">Add products and they will appear in Shop for every visitor.</p><button class="admin-button" data-open-products data-i18n="Manage products">Manage products</button></div>
+      </section>
+      <section class="admin-section" id="products-section" hidden>
+        <div class="admin-top"><div><h1 data-i18n="Products">Products</h1><p data-i18n="Add, update, and search your products.">Add, update, and search your products.</p></div><button class="admin-button" id="add-product" data-i18n="Add Product">＋ Add Product</button></div>
+        <div class="admin-toolbar"><input id="product-search" type="search" placeholder="Search products" data-i18n-placeholder="Search products"><span id="product-total"></span></div>
+        <div class="admin-panel"><div id="products-table"></div></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="product-dialog"><form id="admin-product-form" class="admin-form">
+    <h2 class="wide" id="product-dialog-title" data-i18n="Add Product">Add Product</h2><input name="id" type="hidden">
+    <label class="wide"><span data-i18n="Product name">Product name</span><input name="name" required maxlength="120" placeholder="Oversize T-shirt"></label>
+    <label class="wide"><span data-i18n="Choose Image">Choose Image</span><input name="imageFile" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"><span class="file-note" data-i18n="JPG, PNG, or WEBP · up to 10 MB">JPG, PNG, or WEBP · up to 10 MB</span><img id="image-preview" class="admin-image-preview" alt="Product preview" hidden></label>
+    <label><span data-i18n="Category">Category</span><select name="category" required><option value="T-shirt" data-i18n="T-shirt">T-shirt</option><option value="Dress" data-i18n="Dress">Dress</option><option value="Trousers" data-i18n="Trousers">Trousers</option><option value="Hoodie" data-i18n="Hoodie">Hoodie</option><option value="Shoes" data-i18n="Shoes">Shoes</option><option value="Other" data-i18n="Other">Other</option></select></label>
+    <label><span data-i18n="Regular price">Regular price</span><input name="price" type="number" min="1" step="1" required placeholder="14990"></label>
+    <label><span data-i18n="Discount price (optional)">Discount price (optional)</span><input name="discountPrice" type="number" min="1" step="1" placeholder="12990"></label>
+    <label><span data-i18n="Stock quantity">Stock quantity</span><input name="stock" type="number" min="0" step="1" required value="10"></label>
+    <label class="wide"><span data-i18n="Description">Description</span><textarea name="description" rows="3" maxlength="1500"></textarea></label>
+    <fieldset class="wide"><legend data-i18n="Sizes">Sizes</legend><div class="size-checkboxes"><label><input type="checkbox" name="sizes" value="XS"> XS</label><label><input type="checkbox" name="sizes" value="S"> S</label><label><input type="checkbox" name="sizes" value="M"> M</label><label><input type="checkbox" name="sizes" value="L"> L</label><label><input type="checkbox" name="sizes" value="XL"> XL</label><label><input type="checkbox" name="sizes" value="XXL"> XXL</label></div></fieldset>
+    <label><span data-i18n="Color">Color</span><input name="color" maxlength="60"></label>
+    <label class="check-label"><input name="isNew" type="checkbox" value="true"><span data-i18n="New arrival">New arrival</span></label>
+    <p class="admin-message wide" id="product-message" role="status"></p>
+    <div class="wide form-actions"><button class="admin-button" type="submit" data-i18n="Save Product">💾 Save Product</button><button class="admin-button secondary" type="button" data-close-dialog data-i18n="Cancel">Cancel</button></div>
+  </form></dialog>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script><script src="supabase-client.js"></script>
+  <script src="i18n.js" defer></script><script src="products.js" defer></script><script src="app.js" defer></script><script src="admin.js" defer></script>
+</body>
+</html>

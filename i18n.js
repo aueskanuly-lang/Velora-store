@@ -109,6 +109,7 @@ function addLanguageSwitcher() {
 }
 function applyLanguage(lang=currentLanguage) {
   currentLanguage = translations[lang] ? lang : 'kz';
+  window.currentLanguage = currentLanguage;
   localStorage.setItem('velora-language', currentLanguage);
   document.documentElement.lang = currentLanguage === 'kz' ? 'kk' : currentLanguage;
   document.querySelectorAll('[data-i18n]').forEach(el => { const key=el.dataset.i18n;el.textContent=t(key); });
@@ -137,3 +138,5 @@ function translateTextNodes(root) {
 }
 document.addEventListener('click',event=>{const button=event.target.closest('[data-language]');if(button)applyLanguage(button.dataset.language);});
 document.addEventListener('DOMContentLoaded',()=>{addLanguageSwitcher();applyLanguage(currentLanguage);new MutationObserver(records=>records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType===Node.TEXT_NODE)translateTextNodes(node.parentElement);else if(node.nodeType===Node.ELEMENT_NODE)translateTextNodes(node);}))).observe(document.body,{childList:true,subtree:true});const title=document.querySelector('title');if(title)new MutationObserver(()=>{if(title.textContent!==titleTranslated)titleEnglish=title.textContent;const translated=translateMixedText(titleEnglish);if(title.textContent!==translated)title.textContent=translated;titleTranslated=translated;}).observe(title,{childList:true,characterData:true,subtree:true});});
+Object.assign(translations.kz,{'Checkout':'Тапсырысты рәсімдеу','Continue shopping':'Саудаға оралу','Delivery details':'Жеткізу мәліметтері','Full name':'Аты-жөні','Phone number':'Телефон нөмірі','City':'Қала','Address':'Мекенжай','Comment':'Түсініктеме','Place order':'Тапсырыс беру','Your order':'Тапсырысыңыз','Total':'Жалпы сома','Orders':'Тапсырыстар','Manage customer orders and delivery status.':'Клиент тапсырыстары мен жеткізу мәртебесін басқару.','Refresh':'Жаңарту','Order status':'Тапсырыс мәртебесі','No orders yet.':'Әзірге тапсырыс жоқ.','Could not load orders.':'Тапсырыстарды жүктеу мүмкін болмады.','Could not update order status.':'Тапсырыс мәртебесін өзгерту мүмкін болмады.'});
+Object.assign(translations.ru,{'Checkout':'Оформление заказа','Continue shopping':'Вернуться к покупкам','Delivery details':'Данные доставки','Full name':'ФИО','Phone number':'Номер телефона','City':'Город','Address':'Адрес','Comment':'Комментарий','Place order':'Оформить заказ','Your order':'Ваш заказ','Total':'Итого','Orders':'Заказы','Manage customer orders and delivery status.':'Управление заказами и статусом доставки.','Refresh':'Обновить','Order status':'Статус заказа','No orders yet.':'Заказов пока нет.','Could not load orders.':'Не удалось загрузить заказы.','Could not update order status.':'Не удалось изменить статус заказа.'});

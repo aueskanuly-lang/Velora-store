@@ -24,6 +24,8 @@ A responsive HTML, CSS, and vanilla JavaScript clothing store. The storefront re
 
 GitHub Pages serves the database and client configuration publicly, so the publishable key cannot be treated as a password. Keep signups disabled, keep the admin allowlist accurate, and retain the supplied RLS policies. Any visitor can read published product rows and public product images, but unauthenticated visitors cannot write them.
 
+Customers can continue from the bag to `checkout.html` and submit their name, phone, city, address, and optional comment. Each order gets a UUID, an increasing display number, timestamp, server-calculated total, item and price snapshots, and `pending` status. In the admin panel, open **Orders** to view orders and set their status to `confirmed`, `shipped`, `delivered`, or `cancelled`.
+
 ## Local development and product images
 
 Open `index.html` directly to preview the static demo catalog, or serve the folder with a local static server. Configure Supabase to use the authenticated admin and cloud catalog. Starter photos are individual files in `images/products/`; do not place image data in HTML or localStorage. The cart, wishlist, theme, and selected language still use browser storage.

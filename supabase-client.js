@@ -57,6 +57,24 @@
       const { error } = await client.from('products').delete().eq('id', id);
       if (error) throw error;
       return this.loadProducts();
+    },
+    async placeOrder(order) {
+      const { data, error } = await client.rpc('place_velora_order', {
+        p_customer_name: order.customer_name, p_phone: order.phone,
+        p_city: order.city, p_address: order.address,
+        p_comment: order.comment || '', p_items: order.items
+      });
+      if (error) throw error;
+      return data;
+    },
+    async loadOrders() {
+      const { data, error } = await client.from('orders').select('*').order('created_at', { ascending: false });
+      if (error) throw error;
+      return data || [];
+    },
+    async updateOrderStatus(id, status) {
+      const { error } = await client.from('orders').update({ status }).eq('id', id);
+      if (error) throw error;
     }
   };
 })();
